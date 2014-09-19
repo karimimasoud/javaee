@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html 
+   xmlns="http://www.w3.org/1999/xhtml" 
+   xmlns:h="http://java.sun.com/jsf/html" 
+>
+<head>
+   <title>JSF Tutorial!</title>
+</head>
+<body>
+<h1> #{accountBean.str}</h1>
+<h:form>
+   Account ID :<h:inputText id="accountID" value="#{accountBean.id}"></h:inputText>
+   Account Name :<h:inputText id="accountName" value="#{accountBean.accountName}"></h:inputText>
+   balance :<h:inputText id="parentAccountID" value="#{accountBean.balance}"></h:inputText>
+   <h:commandButton action="${accountBean.addAccount}" value="add account"></h:commandButton>
+
+</h:form>
+</body>
+</html>

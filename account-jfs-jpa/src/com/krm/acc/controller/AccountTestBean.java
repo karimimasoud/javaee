@@ -1,6 +1,9 @@
 package com.krm.acc.controller;
 
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
+
 import com.krm.acc.domain.Account;
 import com.krm.acc.dao.impl.JpaHibernateAccountDao;
 
@@ -12,6 +15,9 @@ public class AccountTestBean {
 	private String accountName = "";
 	private long balance = 0;
 	private String str = "test";
+	
+	private	List<Account> accounts = null;
+
 	
 	public String getStr() {
 		System.out.println("get str: " + str);
@@ -51,5 +57,13 @@ public class AccountTestBean {
 	}
 	public void setBalance(long balance) {
 		this.balance = balance;
+	}
+	public List<Account> getAccounts() {
+		
+		this.accounts = new JpaHibernateAccountDao().getAccount(); 		
+		return accounts;
+	}
+	public void setAccounts(List<Account> accounts) {
+		this.accounts = accounts;
 	}
 }

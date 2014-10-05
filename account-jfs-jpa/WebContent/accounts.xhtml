@@ -5,13 +5,13 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
-	
-<title>Accounts</title>
-	<h:outputStylesheet library="css" name="styles.css"  />
-	
+
+	<title>Accounts</title>
+	<h:outputStylesheet library="css" name="styles.css" />
+
 </h:head>
 <h:body>
-	<h1>#{accountBean.str}</h1>
+	<h1>َAccounts</h1>
 	<h:form>
 		<h:dataTable value="#{accountBean.accounts}" var="account"
 			styleClass="entityTable" headerClass="entityTableHeader"
@@ -33,6 +33,27 @@
 				<h:outputText value="#{account.parentAccountID}"></h:outputText>
 			</h:column>
 		</h:dataTable>
-	</h:form>
+
+
+	<h3>Add Account</h3>
+	<hr />
+	<table>
+		<tr>
+			<td>Name :</td>
+			<td><h:inputText size="20" value="#{accountBean.accountName}" /></td>
+		</tr>
+		<tr>
+			<td>Balance :</td>
+			<td><h:inputText size="20" value="#{accountBean.balance}" /></td>
+		</tr>
+
+		<tr>
+			<td></td>
+			<td><h:commandButton value="Add Account"
+					action="#{accountBean.addAccount}" /></td>
+		</tr>
+	</table>
+		
+		</h:form>
 </h:body>
 </html>

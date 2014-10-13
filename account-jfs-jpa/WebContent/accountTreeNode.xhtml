@@ -6,16 +6,27 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-<h:head></h:head>
+<h:head>
+</h:head>
 <h:body>
+    <ui:insert name="header">
+        <ui:include src="header.xhtml"/>
+    </ui:insert>
 	<f:view>
-		<h:form>
-			<p:tree var="accountNode" value="#{accountBean.accountRoot}" dir="rtl">
-				<p:treeNode>
+		<h:form id="form">
+		
+			<p:growl id="messages" showDetail="true" />
+			<p:tree id="tree1" var="accountNode" value="#{accountBean.accountRoot}"
+				dir="rtl" selectionMode="single"
+				selection="#{accountBean.selectedNode}">
+				<p:ajax event="expand" update=":form:messages" listener="#{accountBean.onNodeExpand}" />
+				<p:ajax event="select" update=":form:tree1:treeNode1" listener="#{accountBean.onNodeSelect}" />
+				<p:treeNode id="treeNode1"> 
 					<h:outputText value="#{accountNode.accountName}"></h:outputText>
 				</p:treeNode>
 			</p:tree>
 			<br />
+
 		</h:form>
 	</f:view>
 </h:body>

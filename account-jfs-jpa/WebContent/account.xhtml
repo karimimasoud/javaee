@@ -3,13 +3,18 @@
 
 <html 
    xmlns="http://www.w3.org/1999/xhtml" 
-   xmlns:h="http://java.sun.com/jsf/html" 
-   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
 >
-<head>
+<h:head>
    <title>JSF Tutorial!</title>
-</head>
-<body>
+       <ui:insert name="header">
+        <ui:include src="header.xhtml"/>
+    </ui:insert>
+</h:head>
+<h:body>
 <h1> #{accountBean.str}</h1>
 <h:form>
    Account ID :<h:inputText id="accountID" value="#{accountBean.id}"></h:inputText>
@@ -18,5 +23,5 @@
    <h:commandButton action="${accountBean.addAccount}" value="add account"></h:commandButton>
 
 </h:form>
-</body>
+</h:body>
 </html>

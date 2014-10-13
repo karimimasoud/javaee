@@ -1,59 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
-
-	<title>Accounts</title>
-	<h:outputStylesheet library="css" name="styles.css" />
-
 </h:head>
 <h:body>
-	<h1>َAccounts</h1>
-	<h:form>
-		<h:dataTable value="#{accountBean.accounts}" var="account"
-			styleClass="entityTable" headerClass="entityTableHeader"
-			rowClasses="entityTableOddRow, entityTableEvenRow">
-			<h:column>
-				<f:facet name="header">ID</f:facet>
-				<h:outputText value="#{account.accountID}"></h:outputText>
-			</h:column>
-			<h:column>
-				<f:facet name="header">Name</f:facet>
-				<h:outputText value="#{account.accountName}"></h:outputText>
-			</h:column>
-			<h:column>
-				<f:facet name="header">Balance</f:facet>
-				<h:outputText value="#{account.balance}"></h:outputText>
-			</h:column>
-			<h:column>
-				<f:facet name="header">parentAccountID</f:facet>
-				<h:outputText value="#{account.parentAccountID}"></h:outputText>
-			</h:column>
-		</h:dataTable>
+	<h:form id="form">
+		<p:growl id="msgs" showDetail="true" />
+		<p:dataTable id="accounts1" value="#{accountBean.accounts}"
+			var="account" editable="true">
+			<f:facet name="header">          		Accounts      		 </f:facet>
+
+			<p:ajax event="rowEdit" listener="#{accountBean.onRowEdit}"
+				update=":form:msgs" />
+			<p:ajax event="rowEditCancel" listener="#{accountBean.onRowCancel}"
+				update=":form:msgs" />
 
 
-	<h3>Add Account</h3>
-	<hr />
-	<table>
-		<tr>
-			<td>Name :</td>
-			<td><h:inputText size="20" value="#{accountBean.accountName}" /></td>
-		</tr>
-		<tr>
-			<td>Balance :</td>
-			<td><h:inputText size="20" value="#{accountBean.balance}" /></td>
-		</tr>
+			<p:column headerText="Account ID">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{account.accountID}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="modelInput" value="#{account.accountID}" style="width:100%"
+							label="Account ID" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
 
-		<tr>
-			<td></td>
-			<td><h:commandButton value="Add Account"
-					action="#{accountBean.addAccount}" /></td>
-		</tr>
-	</table>
-		
-		</h:form>
+
+			<p:column headerText="Account Name">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{account.accountName}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{account.accountName}" style="width:100%"
+							label="Account Name" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Balance">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{account.balance}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{account.balance}" style="width:100%"
+							label="Balance" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Account Parent ID">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{account.parentAccountID}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{account.parentAccountID}" style="width:100%"
+							label="Balance" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column style="width:32px">
+				<p:rowEditor />
+			</p:column>
+		</p:dataTable>
+	</h:form>
 </h:body>
 </html>
